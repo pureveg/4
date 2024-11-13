@@ -58,16 +58,21 @@ def predict(probabilities, unknown_case):
 
     return predicted_class
 
-def get_user_input():
-    outlook_options = ["sunny", "overcast", "rain"]
-    temperature_options = ["hot", "mild", "cool"]
-    humidity_options = ["high", "normal"]
-    windy_options = [True, False]
+def get_user_input(data):
+    outlook_set = set(row[0] for row in data)
+    temperature_set = set(row[1] for row in data)
+    humidity_set = set(row[2] for row in data)
+    windy_set = set(row[3] for row in data)
 
-    outlook_choice = int(input("Select the Outlook (1: sunny, 2: overcast, 3: rain): ")) - 1
-    temperature_choice = int(input("Select the Temperature (1: hot, 2: mild, 3: cool): ")) - 1
-    humidity_choice = int(input("Select the Humidity (1: high, 2: normal): ")) - 1
-    windy_choice = int(input("Select Windy (1: true, 2: false): ")) - 1
+    outlook_options = list(outlook_set)
+    temperature_options = list(temperature_set)
+    humidity_options = list(humidity_set)
+    windy_options = list(windy_set)
+
+    outlook_choice = int(input(f"Select the Outlook {[(i + 1, option) for i, option in enumerate(outlook_options)]}: ")) - 1
+    temperature_choice = int(input(f"Select the Temperature {[(i + 1, option) for i, option in enumerate(temperature_options)]}: ")) - 1
+    humidity_choice = int(input(f"Select the Humidity {[(i + 1, option) for i, option in enumerate(humidity_options)]}: ")) - 1
+    windy_choice = int(input(f"Select Windy {[(i + 1, option) for i, option in enumerate(windy_options)]}: ")) - 1
 
     unknown_case = [
         outlook_options[outlook_choice],
